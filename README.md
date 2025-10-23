@@ -22,65 +22,64 @@ Automates monthly AMI exports, moves older AMIs to Glacier, and sends email repo
 
 Python 3.10+
 
-AWS IAM User with permissions for EC2, S3, SNS, CloudWatch Logs
+🔹 AWS IAM User with permissions for EC2, S3, SNS, CloudWatch Logs
 
-Gmail credentials (OAuth) for sending emails
+🔹 Gmail credentials (OAuth) for sending emails
 
-Python packages:
+🔹 Python packages:
 
 pip install boto3 pandas google-auth google-auth-oauthlib google-api-python-client requests openpyxl
 
 ⚙️ Setup Instructions
 
-AWS Setup
+1. AWS Setup
 
-Configure AWS credentials via environment or ~/.aws/credentials.
+        🔹 Configure AWS credentials via environment or ~/.aws/credentials.
 
-Create CloudWatch log group and SNS topic for notifications.
+        🔹 Create CloudWatch log group and SNS topic for notifications.
 
-Create S3 buckets:
+        🔹 Create S3 buckets:
 
-Source bucket: ami-backups-last-6months
+                🔹 Source bucket: ami-backups-last-6months
 
-Destination/Glacier bucket: ec2ami-backups
+                🔹 Destination/Glacier bucket: ec2ami-backups
 
-Gmail Setup
+2. Gmail Setup
 
-Download credentials.json from Google Cloud Console.
+        🔹 Download credentials.json from Google Cloud Console.
 
-Ensure the Gmail account allows API sending.
+        🔹 Ensure the Gmail account allows API sending.
 
-The script will generate token.json for OAuth token.
+        🔹 The script will generate token.json for OAuth token.
 
-Update Script Constants
-
-aws_region = 'ap-south-1'
-source_bucket_name = 'ami-backups-last-6months'
-destination_bucket = 'ec2ami-backups'
-sns_topic_arn = 'YOUR_SNS_TOPIC_ARN'
-log_group_name = 'YOUR_CLOUDWATCH_LOG_GROUP'
+3. Update Script Constants
+        aws_region = 'ap-south-1'
+        source_bucket_name = 'ami-backups-last-6months'
+        destination_bucket = 'ec2ami-backups'
+        sns_topic_arn = 'YOUR_SNS_TOPIC_ARN'
+        log_group_name = 'YOUR_CLOUDWATCH_LOG_GROUP'
 
 📄 How It Works
 
-Fetch all AMI details owned by your account.
+1. Fetch all AMI details owned by your account.
 
-Filter monthly AMIs and compute size.
+2. Filter monthly AMIs and compute size.
 
-Export eligible AMIs to S3, logging progress in CloudWatch.
+3. Export eligible AMIs to S3, logging progress in CloudWatch.
 
-Send Gmail reports for:
+4. Send Gmail reports for:
 
-Monthly AMI list
+        🔹 Monthly AMI list
 
-Successfully exported AMIs
+        🔹 Successfully exported AMIs
 
-AMIs moved to Glacier
+        🔹 AMIs moved to Glacier
 
-Delete exported AMIs and snapshots.
+5. Delete exported AMIs and snapshots.
 
-Move AMIs older than 6 months to Glacier bucket and clean source bucket.
+6. Move AMIs older than 6 months to Glacier bucket and clean source bucket.
 
-Send final SNS and CloudWatch logs indicating completion.
+7. Send final SNS and CloudWatch logs indicating completion.
 
 📂 File Structure
 .
@@ -101,27 +100,27 @@ Send final SNS and CloudWatch logs indicating completion.
 
 📧 Email Notifications
 
-Sent via Gmail API.
+🔹 Sent via Gmail API.
 
-Reports include:
+🔹 Reports include:
 
-AMI ID, Name, Creation Date
+        🔹 AMI ID, Name, Creation Date
 
-Size before and after export
+        🔹 Size before and after export
 
-S3 path
+        🔹 S3 path
 
-URLs (pre-signed links)
+        🔹 URLs (pre-signed links)
 
 ⚠️ Notes
 
-The script handles retries for export tasks.
+🔹 The script handles retries for export tasks.
 
-Logs are grouped by current date in CloudWatch.
+🔹 Logs are grouped by current date in CloudWatch.
 
-Errors trigger SNS alerts and logs.
+🔹 Errors trigger SNS alerts and logs.
 
-Ensure all AWS IAM policies are correct for EC2, S3, SNS, and CloudWatch.
+🔹 Ensure all AWS IAM policies are correct for EC2, S3, SNS, and CloudWatch.
 
 📸 Screenshots
 <img width="1920" height="913" alt="s3" src="https://github.com/user-attachments/assets/4e3d858f-f811-4c3c-9b85-2b63a4004386" />
