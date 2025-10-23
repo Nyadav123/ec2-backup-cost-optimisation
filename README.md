@@ -122,8 +122,6 @@ pip install boto3 pandas google-auth google-auth-oauthlib google-api-python-clie
 
 🔹 Ensure all AWS IAM policies are correct for EC2, S3, SNS, and CloudWatch.
 
-📸 Screenshots
-<img width="1920" height="913" alt="s3" src="https://github.com/user-attachments/assets/4e3d858f-f811-4c3c-9b85-2b63a4004386" />
 
 
 🧑‍💻 Author
